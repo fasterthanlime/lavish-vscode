@@ -21,6 +21,9 @@
 				},
 				{
 					"include": "#function-declaration"
+				},
+				{
+					"include": "#struct-declaration"
 				}
 			]
 		},
@@ -45,9 +48,44 @@
 				}
 			]
 		},
+		"struct-declaration": {
+			"name": "meta.struct.lavish",
+			"begin": "(struct)\\s+(\\w+)\\s*{",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.type.struct.lavish"
+				},
+				"2": {
+					"name": "entity.name.function.lavish"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#field-declaration"
+				}
+			],
+			"end": "}"
+		},
+		"field-declaration": {
+			"name": "meta.field-declaration.lavish",
+			"begin": "(\\w+):\\s*([\\w<>\\[\\]:]+)",
+			"beginCaptures": {
+				"1": {
+					"name": "entity.name.function.lavish"
+				},
+				"2": {
+					"name": "storage.type.field.lavish"
+				}
+			},
+			"patterns": [],
+			"end": "(?=(,|\\)))"
+		},
 		"function-declaration": {
 			"name": "meta.function.lavish",
-			"begin": "(?:(server)\\s+)?(?:(fn)\\s+)(\\w+)\\s*(.*)",
+			"begin": "(?:(server)\\s+)?(?:(fn)\\s+)(\\w+)\\s*",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control.server.lavish"
@@ -59,8 +97,24 @@
 					"name": "entity.name.function"
 				}
 			},
-			"patterns": [],
+			"patterns": [
+				{
+					"include": "#argument-list"
+				}
+			],
 			"end": "(?=^)"
+		},
+		"argument-list": {
+			"begin": "\\(",
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#field-declaration"
+				}
+			],
+			"end": "\\)"
 		},
 		"comment": {
 			"patterns": [
