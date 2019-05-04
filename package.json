@@ -2,24 +2,34 @@
     "name": "lavish",
     "displayName": "lavish",
     "description": "Syntax highlighting for .lavish files",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "engines": {
         "vscode": "^1.33.0"
     },
     "categories": [
         "Programming Languages"
     ],
+    "publisher": "fasterthanlime",
     "contributes": {
-        "languages": [{
-            "id": "lavish",
-            "aliases": ["Lavish", "lavish"],
-            "extensions": [".lavish"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "lavish",
-            "scopeName": "source.lavish",
-            "path": "./syntaxes/lavish.tmLanguage.json"
-        }]
+        "languages": [
+            {
+                "id": "lavish",
+                "aliases": [
+                    "Lavish",
+                    "lavish"
+                ],
+                "extensions": [
+                    ".lavish"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "lavish",
+                "scopeName": "source.lavish",
+                "path": "./syntaxes/lavish.tmLanguage.json"
+            }
+        ]
     }
 }
