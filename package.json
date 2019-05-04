@@ -10,6 +10,10 @@
         "Programming Languages"
     ],
     "publisher": "fasterthanlime",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/fasterthanlime/lavish-vscode"
+    },
     "contributes": {
         "languages": [
             {
