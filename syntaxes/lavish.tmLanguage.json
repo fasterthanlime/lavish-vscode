@@ -1,0 +1,93 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Lavish",
+	"patterns": [
+		{
+			"include": "#statements"
+		}
+	],
+	"repository": {
+		"statements": {
+			"patterns": [
+				{
+					"include": "#declaration"
+				}
+			]
+		},
+		"declaration": {
+			"patterns": [
+				{
+					"include": "#namespace-declaration"
+				},
+				{
+					"include": "#function-declaration"
+				}
+			]
+		},
+		"namespace-declaration": {
+			"name": "meta.namespace.declaration.lavish",
+			"begin": "(namespace)\\s+(\\w+)\\s*{",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.type.namespace.lavish"
+				},
+				"2": {
+					"name": "entity.name.function.lavish"
+				}
+			},
+			"end": "}",
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#declaration"
+				}
+			]
+		},
+		"function-declaration": {
+			"name": "meta.function.lavish",
+			"begin": "(?:(server)\\s+)?(?:(fn)\\s+)(\\w+)\\s*(.*)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.server.lavish"
+				},
+				"2": {
+					"name": "storage.type.function.lavish"
+				},
+				"3": {
+					"name": "entity.name.function"
+				}
+			},
+			"patterns": [],
+			"end": "(?=^)"
+		},
+		"comment": {
+			"patterns": [
+				{
+					"include": "#single-line-comment-consuming-line-ending"
+				}
+			]
+		},
+		"single-line-comment-consuming-line-ending": {
+			"begin": "(^[ \\t]+)?(?=(//))",
+			"beginCaptures": {
+				"1": {
+					"name": "punctuation.whitespace.comment.leading.lavish"
+				}
+			},
+			"patterns": [],
+			"end": "(?=^)",
+			"contentName": "comment.line.double-slash.lavish"
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.lavish",
+					"match": "\\b(namespace|struct|client|server|peer|fn)\\b"
+				}
+			]
+		}
+	},
+	"scopeName": "source.lavish"
+}
