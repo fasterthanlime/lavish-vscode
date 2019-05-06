@@ -85,7 +85,7 @@
 		},
 		"function-declaration": {
 			"name": "meta.function.lavish",
-			"begin": "(?:(server)\\s+)?(?:(fn)\\s+)(\\w+)\\s*",
+			"begin": "(?:(server|client|peer)\\s+)?(?:(fn)\\s+)(\\w+)\\s*",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control.server.lavish"
