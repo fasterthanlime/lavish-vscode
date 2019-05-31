@@ -2,6 +2,7 @@
     "name": "lavish",
     "displayName": "lavish",
     "description": "Syntax highlighting for .lavish files",
+    "license": "MIT",
     "version": "0.1.1",
     "engines": {
         "vscode": "^1.33.0"
