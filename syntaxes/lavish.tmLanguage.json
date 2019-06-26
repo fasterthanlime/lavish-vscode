@@ -17,6 +17,9 @@
 		"declaration": {
 			"patterns": [
 				{
+					"include": "#comment"
+				},
+				{
 					"include": "#namespace-declaration"
 				},
 				{
@@ -24,6 +27,12 @@
 				},
 				{
 					"include": "#struct-declaration"
+				},
+				{
+					"include": "#enum-declaration"
+				},
+				{
+					"include": "#union-declaration"
 				}
 			]
 		},
@@ -32,7 +41,7 @@
 			"begin": "(namespace)\\s+(\\w+)\\s*{",
 			"beginCaptures": {
 				"1": {
-					"name": "storage.type.namespace.lavish"
+					"name": "keyword.other.fn.lavish"
 				},
 				"2": {
 					"name": "entity.name.function.lavish"
@@ -53,10 +62,10 @@
 			"begin": "(struct)\\s+(\\w+)\\s*{",
 			"beginCaptures": {
 				"1": {
-					"name": "storage.type.struct.lavish"
+					"name": "keyword.other.fn.lavish"
 				},
 				"2": {
-					"name": "entity.name.function.lavish"
+					"name": "entity.name.type.lavish"
 				}
 			},
 			"patterns": [
@@ -68,6 +77,68 @@
 				}
 			],
 			"end": "}"
+		},
+		"enum-declaration": {
+			"name": "meta.enum.lavish",
+			"begin": "(enum)\\s+(\\w+)\\s*{",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.other.fn.lavish"
+				},
+				"2": {
+					"name": "entity.name.type.lavish"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#enum-variant"
+				}
+			],
+			"end": "}"
+		},
+		"enum-variant": {
+			"name": "meta.enum-variant.lavish",
+			"begin": "[ \\t]*(\\w+)",
+			"beginCaptures": {
+				"1": {
+					"name": "entity.name.function.lavish"
+				}
+			},
+			"end": "(?=[,}])"
+		},
+		"union-declaration": {
+			"name": "meta.union.lavish",
+			"begin": "(union)\\s+(\\w+)\\s*{",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.other.fn.lavish"
+				},
+				"2": {
+					"name": "entity.name.type.lavish"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#union-variant"
+				}
+			],
+			"end": "}"
+		},
+		"union-variant": {
+			"name": "meta.union-variant.lavish",
+			"begin": "[ \\t]*(\\w+)",
+			"beginCaptures": {
+				"1": {
+					"name": "entity.name.type.lavish"
+				}
+			},
+			"end": "(?=[,}])"
 		},
 		"field-declaration": {
 			"name": "meta.field-declaration.lavish",
@@ -85,13 +156,13 @@
 		},
 		"function-declaration": {
 			"name": "meta.function.lavish",
-			"begin": "(?:(server|client|peer)\\s+)?(?:(fn)\\s+)(\\w+)\\s*",
+			"begin": "(?:(server|client)\\s+)?(?:(fn)\\s+)(\\w+)\\s*",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control.server.lavish"
 				},
 				"2": {
-					"name": "storage.type.function.lavish"
+					"name": "keyword.other.fn.lavish"
 				},
 				"3": {
 					"name": "entity.name.function"
@@ -124,10 +195,10 @@
 			]
 		},
 		"single-line-comment-consuming-line-ending": {
-			"begin": "(^[ \\t]+)?(?=(//))",
+			"begin": "([ \\t]*//)",
 			"beginCaptures": {
 				"1": {
-					"name": "punctuation.whitespace.comment.leading.lavish"
+					"name": "comment.line.double-slash.lavish"
 				}
 			},
 			"patterns": [],
@@ -138,7 +209,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.lavish",
-					"match": "\\b(namespace|struct|client|server|peer|fn)\\b"
+					"match": "\\b(namespace|struct|enum|union|client|server|peer|fn)\\b"
 				}
 			]
 		}
