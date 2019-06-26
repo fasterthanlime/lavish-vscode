@@ -142,17 +142,42 @@
 		},
 		"field-declaration": {
 			"name": "meta.field-declaration.lavish",
-			"begin": "(\\w+):\\s*([\\w<>\\[\\]:]+)",
+			"begin": "(\\w+):\\s*",
 			"beginCaptures": {
 				"1": {
 					"name": "entity.name.function.lavish"
-				},
-				"2": {
-					"name": "storage.type.field.lavish"
 				}
 			},
-			"patterns": [],
+			"patterns": [
+				{
+					"include": "#type"
+				}
+			],
 			"end": "(?=(,|\\)))"
+		},
+		"type": {
+			"patterns": [
+				{
+					"name": "meta.field-declaration.generic-type.lavish",
+					"begin": "\\<",
+					"patterns": [
+						{
+							"include": "#type"
+						}
+					],
+					"end": "\\>"
+				},
+				{
+					"name": "meta.field-declaration.base-type.lavish",
+					"begin": "(\\w+)",
+					"beginCaptures": {
+						"1": {
+							"name": "storage.type.field.lavish"
+						}
+					},
+					"end": ""
+				}
+			]
 		},
 		"function-declaration": {
 			"name": "meta.function.lavish",
